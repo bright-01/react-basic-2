@@ -3,11 +3,18 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import AppProfile from './AppProfile';
 import reportWebVitals from './reportWebVitals';
+import AppCounter from "./AppCounter";
+import AppProducts from "./AppProducts";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+function AppProduct() {
+    return null;
+}
+
 root.render(
   <React.StrictMode>
-    <AppProfile />
+    <AppProducts />
   </React.StrictMode>
 );
 

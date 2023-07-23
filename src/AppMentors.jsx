@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
 
 export default function AppMentor() {
-  const [person, setPerson] = useState({
-    name: '엘리',
-    title: '개발자',
-    mentors: [
-      {
-        name: '밥',
-        title: '시니어개발자',
-      },
-      {
-        name: '제임스',
-        title: '시니어개발자',
-      },
-    ],
-  });
+  const [person, setPerson] = useState(data);
+  const handleChangeName = () => {
+      const prev = prompt(`누구의 이름을 바꾸고 싶은가요?`);
+      const current = prompt(`이름을 무엇으로 바꾸고 싶은가요?`);
+      setPerson(prevState => ({...prevState, mentors: prevState.mentors.map(mentor =>{
+              if(mentor.name === prev){
+                  return {...mentor, name : current}
+              }
+              return mentor;
+          }),
+      }));
+  }
   return (
     <div>
       <h1>
@@ -28,22 +26,48 @@ export default function AppMentor() {
           </li>
         ))}
       </ul>
-      <button
-        onClick={() => {
-          const prev = prompt(`누구의 이름을 바꾸고 싶은가요?`);
-          const current = prompt(`이름을 무엇으로 바꾸고 싶은가요?`);
-          setPerson((prevState)=> ({...prevState, mentors: prevState.mentors.map((mentor)=>{
+      <button onClick={handleChangeName}> 멘토의 이름을 바꾸기</button>
 
-              if(mentor.name === prev){
-                return {...mentor, name: current}
-              }
-              return mentor;
-              })}))
+        <button
+            onClick={() => {
+                const name = prompt(`이름 추가요?`);
+                const title = prompt(`타이틀 추가요?`);
+                setPerson((prevState) => ({
+                    ...prevState,
+                    mentors: [...prevState.mentors, {name, title}]
+                }) )
+            }}
+        >
+            멘토 추가하기
+        </button>
 
-        }}
-      >
-        멘토의 이름을 바꾸기
-      </button>
+        <button
+            onClick={() => {
+                const prev = prompt(`삭제 이름ㅇ느요요?`);
+                setPerson(prevState => ({
+                    ...prevState,
+                    mentors: prevState.mentors.filter((mentor) => mentor.name != prev)
+                }))
+
+            }}
+        >
+            멘토 삭제하기
+        </button>
     </div>
   );
+}
+
+const data = {
+    name: '엘리',
+    title: '개발자',
+    mentors: [
+        {
+            name: '밥',
+            title: '시니어개발자',
+        },
+        {
+            name: '제임스',
+            title: '시니어개발자',
+        },
+    ],
 }
